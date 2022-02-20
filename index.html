@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<style>
+body {
+	display: flex;
+	justify-content: space-between;
+	font-family: sans-serif;
+	overflow: hidden;
+	background-color: #334366;
+}
+a {
+	color: #fff;
+	text-decoration: none;
+}
+</style>
+</head>
+<body>
+<a id="prev">&lt; prev</a>
+<a href="/webring/list.html">El Goonish Webring</a>
+<a id="next">next &gt;</a>
+<script>
+let data = [
+"munvoseli", "https://munvoseli.github.io/",
+];
+let id = 0;
+let headers = window.location.href.substring(window.location.href.indexOf("?") + 1).split("&").map(x=>x.split("="));
+let userstr = headers[0][0];
+let userid = 0;
+for (; userid < data.length && data[userid] != userstr; userid += 2); {
+	let aid = userid - 2;
+	if (aid < 0) aid = data.length - 2;
+	document.getElementById("prev").setAttribute("href", data[aid + 1]);
+	aid = userid + 2;
+	if (aid >= data.length) aid = 0;
+	document.getElementById("next").setAttribute("href", data[aid + 1]);
+}
+</script>
+</body>
+</html>
